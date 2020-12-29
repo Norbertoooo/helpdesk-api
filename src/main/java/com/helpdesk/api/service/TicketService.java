@@ -2,6 +2,8 @@ package com.helpdesk.api.service;
 
 import com.helpdesk.api.domain.ChangeStatus;
 import com.helpdesk.api.domain.Ticket;
+import com.helpdesk.api.domain.enums.PriorityEnum;
+import com.helpdesk.api.domain.enums.StatusEnum;
 import org.springframework.data.domain.Page;
 
 public interface TicketService {
@@ -20,13 +22,13 @@ public interface TicketService {
 
     Page<Ticket> findByCurrentUser(int page, int count, String userId);
 
-    Page<Ticket> findByParameters(int page, int count, String title, String status, String priority);
+    Page<Ticket> findByParameters(int page, int count, String title, StatusEnum status, PriorityEnum priority);
 
-    Page<Ticket> findByParametersAndCurrentUser(int page, int count, String title, String status, String priority, String userId);
+    Page<Ticket> findByParametersAndCurrentUser(int page, int count, String title, StatusEnum status, PriorityEnum priority, String userId);
 
     Page<Ticket> findByNumber(int page, int count, Integer number);
 
     Iterable<Ticket> findAll();
 
-    Page<Ticket> findByParametersAndAssignedUser(int page, int count, String title, String status, String priority, String assignedUserId);
+    Page<Ticket> findByParametersAndAssignedUser(int page, int count, String title, StatusEnum status, PriorityEnum priority, String assignedUserId);
 }

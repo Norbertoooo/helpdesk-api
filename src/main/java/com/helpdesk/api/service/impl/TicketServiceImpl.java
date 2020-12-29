@@ -2,6 +2,8 @@ package com.helpdesk.api.service.impl;
 
 import com.helpdesk.api.domain.ChangeStatus;
 import com.helpdesk.api.domain.Ticket;
+import com.helpdesk.api.domain.enums.PriorityEnum;
+import com.helpdesk.api.domain.enums.StatusEnum;
 import com.helpdesk.api.repository.ChangeStatusRepository;
 import com.helpdesk.api.repository.TicketRepository;
 import com.helpdesk.api.service.TicketService;
@@ -54,14 +56,14 @@ public class TicketServiceImpl implements TicketService {
         return this.changeStatusRepository.findByTicketIdOrderByDateChangeStatusDesc(ticketId);
     }
 
-    public Page<Ticket> findByParameters(int page, int count,String title,String status,String priority) {
+    public Page<Ticket> findByParameters(int page, int count, String title, StatusEnum status, PriorityEnum priority) {
         Pageable pages = PageRequest.of(page, count);
         return ticketRepository
                 .findByTitleIgnoreCaseContainingAndStatusAndPriorityOrderByDateDesc(title, status, priority, pages);
     }
 
-    public Page<Ticket> findByParametersAndCurrentUser(int page, int count,String title,String status,
-                                                       String priority,String userId) {
+    public Page<Ticket> findByParametersAndCurrentUser(int page, int count,String title,StatusEnum status,
+                                                       PriorityEnum priority,String userId) {
         Pageable pages = PageRequest.of(page, count);
         return this.ticketRepository.
                 findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndUserIdOrderByDateDesc(
@@ -73,8 +75,8 @@ public class TicketServiceImpl implements TicketService {
         return this.ticketRepository.findByNumber(number, pages);
     }
 
-    public Page<Ticket> findByParametersAndAssignedUser(int page, int count,String title,String status,
-                                                        String priority,String assignedUserId) {
+    public Page<Ticket> findByParametersAndAssignedUser(int page, int count,String title,StatusEnum status,
+                                                        PriorityEnum priority,String assignedUserId) {
         Pageable pages = PageRequest.of(page, count);
         return this.ticketRepository.
                 findByTitleIgnoreCaseContainingAndStatusIgnoreCaseContainingAndPriorityIgnoreCaseContainingAndAssignedUserIdOrderByDateDesc(
