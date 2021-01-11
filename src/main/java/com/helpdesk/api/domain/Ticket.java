@@ -21,7 +21,7 @@ public class Ticket {
     @DBRef(lazy = true)
     private User user;
 
-    private Date date;
+    private Date date = new Date();
 
     private String title;
 
