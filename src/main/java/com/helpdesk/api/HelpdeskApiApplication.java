@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static com.helpdesk.api.domain.enums.ProfileEnum.ROLE_ADMIN;
+
 @SpringBootApplication
 @Log4j2
 public class HelpdeskApiApplication {
@@ -27,7 +29,7 @@ public class HelpdeskApiApplication {
 
     private void initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         log.info("inserindo usuario administrador");
-        User admin = new User("","admin@gmail.com", passwordEncoder.encode("123456"), ProfileEnum.ROLE_ADMIN);
+        User admin = new User("","admin@gmail.com", passwordEncoder.encode("123456"), ROLE_ADMIN);
         userRepository.save(admin);
     }
 
